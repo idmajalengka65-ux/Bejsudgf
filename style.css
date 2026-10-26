@@ -1,0 +1,757 @@
+/* ============================================= */
+/* ===== RESET & BASE ========================== */
+/* ============================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+body {
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* ============================================= */
+/* ===== CONTAINER ============================= */
+/* ============================================= */
+.container {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    max-height: 100vh;
+    max-height: 100dvh;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 24px;
+    overflow: hidden;
+}
+
+/* ============================================= */
+/* ===== BANNER OFFLINE ======================== */
+/* ============================================= */
+#offlineBanner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ff9800;
+    color: #ffffff;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 10000;
+    letter-spacing: 0.2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.35s ease;
+}
+
+@keyframes slideDown {
+    0%   { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0);     opacity: 1; }
+}
+
+/* ============================================= */
+/* ===== LOADING SCREEN FULL =================== */
+/* ============================================= */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+#loadingScreen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ovo-loader {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ovo-logo-text {
+    font-size: 48px;
+    font-weight: 900;
+    color: #4B006E;
+    letter-spacing: 2px;
+    z-index: 3;
+    animation: pulseText 1.5s ease-in-out infinite;
+    text-shadow: 0 2px 8px rgba(75, 0, 110, 0.2);
+}
+
+@keyframes pulseText {
+    0%, 100% { transform: scale(1);    opacity: 1;   }
+    50%      { transform: scale(1.08); opacity: 0.9; }
+}
+
+.ovo-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ovo-ring:nth-child(2) {
+    width: 100px;
+    height: 100px;
+    border-top-color: #4B006E;
+    border-right-color: #4B006E;
+    animation: spinRing 1.2s linear infinite;
+}
+
+.ovo-ring:nth-child(3) {
+    width: 130px;
+    height: 130px;
+    border-bottom-color: #a07ab0;
+    border-left-color: #a07ab0;
+    animation: spinRing 1.8s linear infinite reverse;
+}
+
+.ovo-ring:nth-child(4) {
+    width: 160px;
+    height: 160px;
+    border-top-color: rgba(75, 0, 110, 0.4);
+    animation: spinRing 2.4s linear infinite;
+}
+
+@keyframes spinRing {
+    0%   { transform: translate(-50%, -50%) rotate(0deg);   }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.loading-copyright {
+    color: #888;
+    font-size: 12px;
+    margin-top: 30px;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================= */
+/* ===== LOGO HEADER (TEKS OVO) ================ */
+/* ============================================= */
+.logo-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 10px 0;
+    flex-shrink: 0;
+}
+
+.ovo-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ovo-brand-text {
+    font-size: 34px;
+    font-weight: 900;
+    color: #4B006E;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(75, 0, 110, 0.15);
+}
+
+/* ============================================= */
+/* ===== FORM CARD ============================= */
+/* ============================================= */
+.form-card {
+    width: 100%;
+    margin-top: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.form-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.form-sub {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* ============================================= */
+/* ===== INPUT GROUP =========================== */
+/* ============================================= */
+.input-group {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #fafafa;
+    transition: 0.2s;
+    outline: none;
+    color: #1a1a1a;
+}
+
+.input-group input:focus {
+    border-color: #4B006E;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(75, 0, 110, 0.15);
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+    font-size: 15px;
+}
+
+/* ============================================= */
+/* ===== INLINE ERROR (pengganti alert) ======== */
+/* ============================================= */
+.inline-error {
+    color: #d32f2f;
+    font-size: 13px;
+    text-align: center;
+    margin: -6px 0 10px 0;
+    min-height: 18px;
+    font-weight: 600;
+    display: none;
+}
+
+.inline-error.show {
+    display: block;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    0%   { opacity: 0; transform: translateY(-4px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+
+/* ============================================= */
+/* ===== BUTTON PRIMARY ======================== */
+/* ============================================= */
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: #4B006E;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+    background: #3a0056;
+}
+
+.btn-primary:disabled {
+    background: #a07ab0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================= */
+/* ===== SPINNER TOMBOL ======================== */
+/* ============================================= */
+.spinner-ovo {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================= */
+/* ===== PAGE (SCREEN) ========================= */
+/* ============================================= */
+.page {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeUp 0.35s ease;
+    overflow: hidden;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+
+#pageNomor {
+    justify-content: flex-start;
+}
+
+#pageNomor .form-card {
+    flex: 1;
+}
+
+#pageNomor .btn-primary {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+/* ============================================= */
+/* ===== OTP BOX (4 DIGIT) ===================== */
+/* ============================================= */
+.otp-boxes {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    margin: 20px 0 10px 0;
+    flex-wrap: nowrap;
+}
+
+.otp-boxes input {
+    width: 62px;
+    height: 72px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    border: 2px solid #4B006E;
+    border-radius: 14px;
+    background: #fafafa;
+    outline: none;
+    transition: 0.2s;
+    color: #4B006E;
+    caret-color: #4B006E;
+}
+
+.otp-boxes input:focus {
+    border-color: #4B006E;
+    background: #f5ecfa;
+    box-shadow: 0 0 0 3px rgba(75, 0, 110, 0.2);
+}
+
+/* ============================================= */
+/* ===== PIN BOX (6 DIGIT) ===================== */
+/* ============================================= */
+.pin-boxes {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin: 20px 0 10px 0;
+    flex-wrap: nowrap;
+}
+
+.pin-boxes input {
+    width: 52px;
+    height: 62px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    border: 2px solid #4B006E;
+    border-radius: 14px;
+    background: #fafafa;
+    outline: none;
+    transition: 0.2s;
+    color: #4B006E;
+    caret-color: #4B006E;
+}
+
+.pin-boxes input:focus {
+    border-color: #4B006E;
+    background: #f5ecfa;
+    box-shadow: 0 0 0 3px rgba(75, 0, 110, 0.2);
+}
+
+/* ============================================= */
+/* ===== PIN ERROR ============================= */
+/* ============================================= */
+.pin-boxes.error input {
+    border-color: #ff0000;
+    background: #ffe6e6;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0);    }
+    25%      { transform: translateX(-8px); }
+    75%      { transform: translateX(8px);  }
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 8px;
+    display: none;
+    font-weight: 600;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.info-message {
+    font-size: 13px;
+    color: #888;
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* ============================================= */
+/* ===== TRANSISI LOADING ANTAR HALAMAN ======== */
+/* ============================================= */
+.transition-loading {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.transition-loading.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.ovo-loader-small {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ovo-logo-text-small {
+    font-size: 32px;
+    font-weight: 900;
+    color: #4B006E;
+    letter-spacing: 1.5px;
+    z-index: 3;
+    animation: pulseTextSmall 1.2s ease-in-out infinite;
+}
+
+@keyframes pulseTextSmall {
+    0%, 100% { transform: scale(1);    opacity: 1;    }
+    50%      { transform: scale(1.1);  opacity: 0.85; }
+}
+
+.ovo-ring-small {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #4B006E;
+    border-right-color: #4B006E;
+    border-bottom-color: #a07ab0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spinRing 1s linear infinite;
+}
+
+/* ============================================= */
+/* ===== RESPONSIVE: TABLET (>= 600px) ========= */
+/* ============================================= */
+@media (min-width: 600px) {
+    .container {
+        max-width: 460px;
+        height: 100%;
+        max-height: 100vh;
+        max-height: 100dvh;
+        padding: 40px 36px;
+    }
+
+    .logo-header {
+        padding: 8px 0 4px 0;
+    }
+
+    .ovo-brand-text {
+        font-size: 38px;
+    }
+
+    .form-title {
+        font-size: 22px;
+    }
+
+    .form-sub {
+        font-size: 14.5px;
+        margin-bottom: 28px;
+    }
+
+    .input-group input {
+        padding: 15px 18px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        padding: 16px;
+        font-size: 17px;
+        border-radius: 14px;
+    }
+
+    .btn-primary:hover {
+        background: #5a0080;
+    }
+
+    .otp-boxes input {
+        width: 68px;
+        height: 78px;
+        font-size: 30px;
+    }
+
+    .pin-boxes input {
+        width: 56px;
+        height: 66px;
+        font-size: 28px;
+    }
+
+    #pageNomor .btn-primary {
+        margin-top: auto;
+        margin-bottom: 0;
+    }
+}
+
+/* ============================================= */
+/* ===== RESPONSIVE: DESKTOP (>= 900px) ======== */
+/* ============================================= */
+@media (min-width: 900px) {
+    .container {
+        max-width: 480px;
+        height: 100%;
+        max-height: 100vh;
+        max-height: 100dvh;
+        padding: 48px 44px 40px;
+    }
+
+    .ovo-brand-text {
+        font-size: 40px;
+    }
+
+    .form-title {
+        font-size: 24px;
+    }
+
+    .form-sub {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .btn-primary {
+        padding: 17px;
+        font-size: 18px;
+    }
+
+    .btn-primary:hover {
+        background: #5a0080;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(75, 0, 110, 0.25);
+    }
+
+    .btn-primary:active {
+        transform: scale(0.98) translateY(0);
+    }
+
+    .otp-boxes input {
+        width: 76px;
+        height: 88px;
+        font-size: 34px;
+    }
+
+    .pin-boxes input {
+        width: 62px;
+        height: 74px;
+        font-size: 30px;
+    }
+}
+
+/* ============================================= */
+/* ===== RESPONSIVE: MOBILE KECIL (<=400px) ==== */
+/* ============================================= */
+@media (max-width: 400px) {
+    .otp-boxes { gap: 12px; }
+    .otp-boxes input {
+        width: 52px;
+        height: 62px;
+        font-size: 24px;
+    }
+
+    .pin-boxes input {
+        width: 44px;
+        height: 54px;
+        font-size: 22px;
+    }
+
+    .ovo-brand-text {
+        font-size: 28px;
+    }
+
+    .ovo-loader {
+        width: 150px;
+        height: 150px;
+    }
+
+    .ovo-logo-text {
+        font-size: 40px;
+    }
+
+    .ovo-ring:nth-child(2) {
+        width: 85px;
+        height: 85px;
+    }
+
+    .ovo-ring:nth-child(3) {
+        width: 110px;
+        height: 110px;
+    }
+
+    .ovo-ring:nth-child(4) {
+        width: 135px;
+        height: 135px;
+    }
+
+    #offlineBanner {
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+}
+
+/* ============================================= */
+/* ===== MOBILE PENDEK (landscape / HP kecil) == */
+/* ============================================= */
+@media (max-height: 640px) {
+    .logo-header {
+        padding: 8px 0 4px 0;
+    }
+
+    .ovo-brand-text {
+        font-size: 24px;
+    }
+
+    .form-title {
+        font-size: 18px;
+    }
+
+    .form-sub {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .otp-boxes input {
+        width: 48px;
+        height: 56px;
+        font-size: 22px;
+    }
+
+    .pin-boxes input {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .btn-primary {
+        padding: 13px;
+        font-size: 16px;
+    }
+
+    .input-group input {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+}
+
+/* ============================================= */
+/* ===== REDUCED MOTION (aksesibilitas) ======== */
+/* ============================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
